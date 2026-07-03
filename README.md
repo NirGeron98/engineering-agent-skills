@@ -109,9 +109,11 @@ Each skill folder contains four files with strictly separated jobs:
 
 Skills that touch live systems carry an evidence access rule: when the agent cannot run a query, command, browser check, log search, cloud command, CI query, Terraform plan, or `kubectl` inspection itself, it outputs the exact command for the user to run and paste back, and marks dependent conclusions as pending.
 
-## Contributing And Creating Skills
+## Contributing
 
-Start from [templates/skill-template/](templates/skill-template/). Keep new skills narrow, evidence-driven, and routed by the frontmatter description. Do not add a skill unless it changes behavior beyond a normal prompt.
+Contributions should keep this repository workflow-first and evidence-first. Before proposing a new skill, check [SKILL_CATALOG.md](SKILL_CATALOG.md) for existing coverage and use [templates/skill-template/](templates/skill-template/) for the required structure.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules and validation expectations.
 
 ## Evaluation
 
