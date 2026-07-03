@@ -22,6 +22,10 @@ After the minimum start feels useful, add these based on the kind of backend wor
 - [skills/api-and-backend/api-design-review](../skills/api-and-backend/api-design-review/SKILL.md) - review API contracts for consistency, compatibility, pagination, idempotency, and error semantics.
 - [skills/api-and-backend/service-debugging](../skills/api-and-backend/service-debugging/SKILL.md) - diagnose deployed service failures through logs, traces, metrics, config, and timeline evidence.
 - [skills/api-and-backend/auth-flow-review](../skills/api-and-backend/auth-flow-review/SKILL.md) - verify authentication and authorization route by route, including object-level access.
+- [skills/api-and-backend/background-job-queue-review](../skills/api-and-backend/background-job-queue-review/SKILL.md) - review async job/queue reliability: delivery semantics, retries, dead-lettering, idempotent consumers, ordering, and backlog.
+- [skills/api-and-backend/webhook-reliability-review](../skills/api-and-backend/webhook-reliability-review/SKILL.md) - review webhook sending and receiving for signature verification, replay protection, retries, and idempotent receipt.
+- [skills/api-and-backend/idempotency-and-retry-safety-review](../skills/api-and-backend/idempotency-and-retry-safety-review/SKILL.md) - audit which write operations are safe to retry or receive twice, and where duplicate-suppression must live.
+- [skills/api-and-backend/rate-limiting-and-backpressure-review](../skills/api-and-backend/rate-limiting-and-backpressure-review/SKILL.md) - review inbound rate limiting and outbound backpressure so the service degrades instead of collapsing under load.
 - [skills/planning/task-breakdown](../skills/planning/task-breakdown/SKILL.md) - turn a backend feature into an evidence-backed implementation plan.
 
 ## Situational Skills

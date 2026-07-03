@@ -1,6 +1,6 @@
 # Evaluating this repository
 
-Sixty-three realistic scenarios for testing whether these skills route correctly and change agent behavior. Run each prompt in a session where all 63 skills are available to the agent, against a repo that fits the scenario. Judge against the pass/fail criteria — not against whether the answer "sounds good". Scenarios 43-52 cover the `security-review` and `observability` domains; scenarios 53-63 cover the `database` and `performance` domains.
+Seventy-one realistic scenarios for testing whether these skills route correctly and change agent behavior. Run each prompt in a session where all 71 skills are available to the agent, against a repo that fits the scenario. Judge against the pass/fail criteria — not against whether the answer "sounds good". Scenarios 43-52 cover the `security-review` and `observability` domains; scenarios 53-63 cover the `database` and `performance` domains; scenarios 64-71 cover the expanded `api-and-backend` and `data` domains.
 
 Two things are under test in every scenario:
 
@@ -954,8 +954,128 @@ Two things are under test in every scenario:
 
 ---
 
+## 64. Background job duplicated on redelivery
+
+**User prompt**: "We added an SQS worker that sends order-confirmation emails. Can you review the queue setup before we roll it out? Code is in `workers/order-emails/`."
+
+**Expected skill**: `background-job-queue-review`
+**Acceptable secondary**: `idempotency-and-retry-safety-review` for deep consumer-idempotency; NOT `service-debugging` (nothing is failing live).
+
+**Expected behavior**: reads the broker/library config and states delivery semantics (at-least-once) with the config line; maps producer → queue → consumer; checks the handler for idempotency under redelivery; traces the retry/DLQ path and whether the DLQ is monitored; analyzes the crash-before-ack window and visibility-timeout vs job duration; requests DLQ alarm evidence it can't see and marks that finding pending; ranks findings by blast radius.
+
+**Bad behavior**: accepting "exactly-once" from a flag without verifying idempotency; reviewing only the happy path; asserting the DLQ is unmonitored without evidence; proposing to redesign the broker.
+
+**Pass/fail**: PASS requires (a) delivery semantics cited from config, (b) a duplication finding naming the non-idempotent operation and its redelivery trigger, (c) the crash/visibility-timeout window analyzed. FAIL if the review treats the queue as reliable without checking redelivery behavior.
+
+---
+
+## 65. Webhook receiver trusting unverified payloads
+
+**User prompt**: "Please review our Stripe webhook handler before we go live with subscriptions. It's `routes/webhooks/stripe.ts`."
+
+**Expected skill**: `webhook-reliability-review`
+**Acceptable secondary**: `idempotency-and-retry-safety-review` for money-moving receipt depth; `api-design-review` only for payload shape, not instead.
+
+**Expected behavior**: identifies inbound scope and the provider signing scheme; verifies signature is checked over the raw body before any side effect; checks replay/timestamp protection and event-id dedup; checks fast-ack-then-async and the handler crash window; requests the middleware order (raw-body) it can't see and marks the signature findings pending; ranks forgery/replay above duplication.
+
+**Bad behavior**: accepting a valid signature as proof of freshness (ignoring replay); missing that global JSON parsing defeats raw-body verification; treating each event as arriving exactly once; generic REST advice.
+
+**Pass/fail**: PASS requires (a) signature-before-side-effect verification checked with file evidence, (b) replay protection assessed separately from signature, (c) event-id dedup checked. FAIL if an unverified-payload or duplicate-processing path is missed.
+
+---
+
+## 66. Which writes are safe before enabling gateway retries
+
+**User prompt**: "We're about to turn on automatic retries at our API gateway (retries 5xx and timeouts). Before we do, which of our write endpoints are safe? Payments and notifications are in `src/billing/` and `src/notify/`."
+
+**Expected skill**: `idempotency-and-retry-safety-review`
+**Acceptable secondary**: `api-design-review` for idempotency-key contract shape; NOT `service-debugging`.
+
+**Expected behavior**: enumerates every mutating operation and its side effects; names the retry sources; classifies natural-idempotent vs accumulating; locates the dedup mechanism per unsafe op and confirms it's enforced atomically (not check-then-act); flags server-generated keys as non-protective; requests a duplicate-detection query it can't run and marks that pending; produces a per-operation verdict matrix ranked by blast radius.
+
+**Bad behavior**: declaring an endpoint safe from the HTTP verb; treating a DB upsert as covering an un-deduped email/third-party effect; accepting a check-then-act with no unique constraint; giving prose instead of a per-operation matrix.
+
+**Pass/fail**: PASS requires (a) every write op has an explicit verdict, (b) each "protected" cites an atomic mechanism, (c) at least one gap names the duplicate outcome and retry trigger. FAIL if any accumulating write is called safe without a proven mechanism.
+
+---
+
+## 67. Will the service hold up under a launch spike
+
+**User prompt**: "We're launching next week and expect a big spike on the search API. Will our rate limiting and overload protection actually hold? Service is in `services/search/`."
+
+**Expected skill**: `rate-limiting-and-backpressure-review`
+**Acceptable secondary**: `throughput-bottleneck-triage` only if the ask shifts to *reaching* a QPS target; NOT `service-debugging` (nothing is failing yet).
+
+**Expected behavior**: maps the capacity chain and identifies the binding ceiling from real pool config; inventories inbound limits with algorithm/scope/storage and calls out per-instance-vs-fleet; checks every downstream call for timeout, bounded pool, circuit breaker, and retry backoff; checks load shedding and health-check isolation; requests replica count / limiter store it can't see and marks the fleet-limit figure pending; ranks cascading-collapse risks first.
+
+**Bad behavior**: reviewing only the inbound limiter while downstream calls are unbounded; treating a per-instance in-memory limit as a fleet cap; ignoring retry amplification; recommending a 500 response for over-limit.
+
+**Pass/fail**: PASS requires (a) the binding capacity ceiling identified from config, (b) outbound timeout/backpressure checked, not just inbound limits, (c) per-instance-vs-fleet storage called out. FAIL if backpressure on dependencies is ignored.
+
+---
+
+## 68. Dashboard stopped updating two days ago
+
+**User prompt**: "Finance says the daily revenue dashboard hasn't moved since Tuesday. It's built on `mart.daily_revenue` in BigQuery. Find out why." (Agent has warehouse read access but not the ingestion tool's run history or the operational DB.)
+
+**Expected skill**: `data-freshness-investigation`
+**Acceptable secondary**: `backfill-planning-and-verification` for recovery scope; `data-quality-contracts` for the missing check; NOT `data-reconciliation-investigation` (values aren't mismatched, they're stale).
+
+**Expected behavior**: quantifies staleness with max-timestamp queries and distinguishes load-time from event-time freshness; traces the pipeline backward and bisects the chain to localize the break; classifies it (didn't run / loaded nothing / source stopped / not visible); requests connector run history and a source-side count it can't obtain and marks the classification pending rather than blaming the source from an empty table; enumerates downstream blast radius.
+
+**Bad behavior**: re-running the last job without localizing the break; concluding "source stopped" from an empty warehouse table; declaring the table fresh because `_loaded_at` is recent; reading transformation SQL top to bottom before localizing.
+
+**Pass/fail**: PASS requires (a) staleness quantified with real queries and load-vs-event-time distinguished, (b) the break localized by bisecting the chain, (c) "source stopped" left pending on a true-source check rather than inferred. FAIL if the fix is "re-run it" without localization.
+
+---
+
+## 69. Warehouse total doesn't match the app
+
+**User prompt**: "Our BigQuery `mart.orders_summary` shows 5% more monthly revenue than the admin panel. Which one is right and why?" (Agent can query BigQuery but not the operational Postgres.)
+
+**Expected skill**: `data-reconciliation-investigation`
+**Acceptable secondary**: `backfill-planning-and-verification` for restatement; `data-quality-contracts` for a standing check; NOT `data-consistency-incident-diagnosis` (this is warehouse-vs-source reporting, not live OLTP).
+
+**Expected behavior**: pins both figures with precise definitions and confirms they're *supposed* to be equal; reproduces each from its own source; decomposes the delta along a shared dimension instead of comparing totals; reconciles count and sum stage by stage to localize divergence; classifies the mechanism and proves it with the actual offending rows (duplicated keys / anti-join); requests the source-side breakdown it can't run and marks it pending; gives a verdict on which number is right.
+
+**Bad behavior**: theorizing about causes from the totals without decomposing; asserting "probably a join fan-out" without showing duplicated rows; assuming the two must match without checking definitions (gross vs net, status filter); reconciling count but not sum.
+
+**Pass/fail**: PASS requires (a) both figures reproduced from their definitions, (b) the delta decomposed by a shared dimension, (c) the mechanism proven with specific rows, not asserted. FAIL if a cause is named without row-level proof.
+
+---
+
+## 70. Backfill a column after a logic fix
+
+**User prompt**: "We fixed a rounding bug in `tax_amount` in `mart.order_lines`, affecting orders since the March tax-logic change. Plan the backfill. It's partitioned by `order_date` in BigQuery." (Agent can't run dry-runs or query the table.)
+
+**Expected skill**: `backfill-planning-and-verification`
+**Acceptable secondary**: `dataform-bigquery-development` for the model rewrite; `data-reconciliation-investigation` if the fix itself still needs validating; NOT `schema-migration-safety-review` (this is warehouse data, not an OLTP DDL migration).
+
+**Expected behavior**: bounds scope to the provably-affected partitions/rows and proposes a count query; validates the fixed logic on a sample against an independent reference before the full run; chooses an idempotent partition-replace/MERGE mechanism and rejects blind append; batches by partition with resumable progress; requests dry-run bytes it can't obtain and marks cost pending; defines validation (metric matches reference, out-of-scope partitions checksum-identical) and a snapshot rollback.
+
+**Bad behavior**: reloading the whole table "to be safe"; backfilling before validating the fix; blind-append execution; launching without a cost estimate; validation that only checks the job completed; no rollback.
+
+**Pass/fail**: PASS requires (a) scope bounded and proven with a count query, (b) an idempotent write mechanism with blind-append rejected, (c) cost estimated (or pending dry-run) and a rollback path. FAIL if the plan risks double-counting or omits pre-run fix validation.
+
+---
+
+## 71. Warehouse bill doubled
+
+**User prompt**: "Our BigQuery bill nearly doubled last quarter and nobody knows why. Find what's driving it and how to cut it. We're on on-demand pricing." (Agent can read model SQL in the repo but can't run `INFORMATION_SCHEMA` queries or dry-runs.)
+
+**Expected skill**: `data-pipeline-cost-review`
+**Acceptable secondary**: `dataform-bigquery-development` for in-place model rewrites; `backfill-planning-and-verification` for any recompute; NOT `query-performance-review` (that's a single OLTP query, not warehouse spend attribution).
+
+**Expected behavior**: insists on the actual cost distribution from job/query history before naming a culprit, ranking by frequency × per-run; attributes each top driver to a mechanism in its SQL/config; sizes each fix's saving from dry-run/bytes evidence; states the correctness/freshness risk of each fix (e.g. incremental needs late-data handling; cadence cut vs SLA); verifies "unused" models before deletion; marks spend numbers pending because it can't run the history queries.
+
+**Bad behavior**: optimizing the query that "looks heavy" without history; ignoring a frequent cheap job that outspends a nightly one; converting a rebuild to incremental without late-data/idempotency handling; proposing savings with no numbers; deleting a model assumed unused.
+
+**Pass/fail**: PASS requires (a) cost ranked from actual history (or that history explicitly requested and marked pending), (b) each fix with an evidence-based saving estimate, (c) each fix with a correctness/freshness risk note. FAIL if a cost cut is proposed that silently breaks correctness or freshness.
+
+---
+
 ## Scoring across the suite
 
-- **Routing score**: 63/63 scenarios should load the expected skill; scenarios 2/3, 4/5/6, 16/17, 18/19/20/21/22/23/24, 25/26/27/28/29/30, 31/32/33/34/35/36, 37/38/39/40/41/42, 43/44/45/46/47, 48/49/50/51/52, and 53/54/55/56/57/58/59/60/61/62/63 also test that near-neighbor skills *don't* fire or hand off explicitly.
+- **Routing score**: 71/71 scenarios should load the expected skill; scenarios 2/3, 4/5/6, 16/17, 18/19/20/21/22/23/24, 25/26/27/28/29/30, 31/32/33/34/35/36, 37/38/39/40/41/42, 43/44/45/46/47, 48/49/50/51/52, 53/54/55/56/57/58/59/60/61/62/63, 64/65/66/67 (backend near-neighbors vs `service-debugging`), and 68/69/70/71 (data near-neighbors vs `data-quality-contracts`, `db-to-dwh-pipeline`, and `data-consistency-incident-diagnosis`) also test that near-neighbor skills *don't* fire or hand off explicitly.
 - **Behavior-delta score**: for each scenario, ask "which of these actions would a capable agent have skipped without the skill?" A run can be pleasant and still FAIL if the skill-specific behaviors (persistence, evidence requests, double-run proofs, backtests) are absent.
 - **Reference wiring**: in at least a spot-check of runs, confirm the agent actually loaded `references/checklist.md` before its handoff — that wiring is what makes the reference files real.

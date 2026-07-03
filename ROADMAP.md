@@ -8,7 +8,7 @@ The repository is intentionally workflow-first: each skill should map to a real 
 
 The current public scope is stable:
 
-- 63 skills
+- 71 skills
 - 14 approved domains
 - 4 optional role bundles
 - one reusable skill template

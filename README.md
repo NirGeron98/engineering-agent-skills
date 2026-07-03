@@ -17,9 +17,13 @@ Do not install everything. Start with the workflow you need.
 | Design or review an API | [skills/api-and-backend/api-design-review](skills/api-and-backend/api-design-review) |
 | Debug a deployed service | [skills/api-and-backend/service-debugging](skills/api-and-backend/service-debugging) |
 | Review auth or authorization | [skills/api-and-backend/auth-flow-review](skills/api-and-backend/auth-flow-review) |
+| Review a queue, webhook, or retry-safety concern | [skills/api-and-backend/idempotency-and-retry-safety-review](skills/api-and-backend/idempotency-and-retry-safety-review) |
+| Review overload protection and rate limiting | [skills/api-and-backend/rate-limiting-and-backpressure-review](skills/api-and-backend/rate-limiting-and-backpressure-review) |
 | Debug frontend/API integration | [skills/frontend/api-integration-debugging](skills/frontend/api-integration-debugging) |
 | Review frontend state | [skills/frontend/frontend-state-management](skills/frontend/frontend-state-management) |
 | Review data quality | [skills/data/data-quality-contracts](skills/data/data-quality-contracts) |
+| Investigate stale or mismatched data | [skills/data/data-reconciliation-investigation](skills/data/data-reconciliation-investigation) |
+| Plan a data backfill | [skills/data/backfill-planning-and-verification](skills/data/backfill-planning-and-verification) |
 | Review a Terraform plan | [skills/devops-infrastructure/terraform-plan-review](skills/devops-infrastructure/terraform-plan-review) |
 | Debug IAM permissions | [skills/devops-infrastructure/iam-permissions-debugging](skills/devops-infrastructure/iam-permissions-debugging) |
 | Debug Kubernetes workloads | [skills/devops-infrastructure/kubernetes-workload-debugging](skills/devops-infrastructure/kubernetes-workload-debugging) |
@@ -81,9 +85,9 @@ skills/
   planning/                Repo orientation and technical planning
   debugging/               Reproducible bug diagnosis
   review/                  Code review workflows
-  api-and-backend/         API contracts, service debugging, auth review
+  api-and-backend/         API contracts, service debugging, auth, queues, webhooks, idempotency, rate limiting
   frontend/                Components, state, forms, a11y, RTL, performance, API integration
-  data/                    Pipelines, warehouse modeling, data quality
+  data/                    Pipelines, warehouse modeling, data quality, freshness, reconciliation, backfills, cost
   devops-infrastructure/   CI/CD, deployments, Terraform, IAM, Kubernetes, incidents, releases
   architecture/            System design, ADRs, boundaries, coupling, debt triage, refactors
   testing/                 Test strategy, TDD, characterization, integration, E2E, flaky tests
@@ -121,4 +125,4 @@ See [EVALUATION.md](EVALUATION.md): realistic scenarios with expected routing, a
 
 ## Status
 
-This is a workflow-based repository: 63 skills across fourteen task/domain categories, with four optional role bundles. See [ROADMAP.md](ROADMAP.md) for current scope and change policy.
+This is a workflow-based repository: 71 skills across fourteen task/domain categories, with four optional role bundles. See [ROADMAP.md](ROADMAP.md) for current scope and change policy.

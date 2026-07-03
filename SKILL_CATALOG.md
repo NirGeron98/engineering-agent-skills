@@ -45,6 +45,26 @@ Use this when you know the task but not the skill name.
   - Produces: an access-control review with route inventory, findings, and regression tests.
   - Path: `skills/api-and-backend/auth-flow-review`
 
+- `background-job-queue-review`
+  - Use when: a background job or message-queue workflow needs reliability review, or jobs are lost, duplicated, stuck, or reprocessed.
+  - Produces: a reliability findings report covering delivery semantics, retries, dead-lettering, idempotent consumers, ordering, and backlog behavior.
+  - Path: `skills/api-and-backend/background-job-queue-review`
+
+- `webhook-reliability-review`
+  - Use when: webhook sending or receiving needs review, or webhooks are missed, duplicated, out of order, or failing signature checks.
+  - Produces: a webhook reliability report covering signature verification, replay protection, retries, idempotent receipt, and delivery visibility.
+  - Path: `skills/api-and-backend/webhook-reliability-review`
+
+- `idempotency-and-retry-safety-review`
+  - Use when: you need to know which write operations are safe to retry or receive twice, or duplicates (double charges, double emails, duplicate rows) are reported.
+  - Produces: a per-operation retry-safety matrix with the exact idempotency mechanism or gap for each.
+  - Path: `skills/api-and-backend/idempotency-and-retry-safety-review`
+
+- `rate-limiting-and-backpressure-review`
+  - Use when: a service needs overload protection review, or it falls over under spikes or a slow dependency.
+  - Produces: an overload-protection report covering inbound limits, outbound backpressure, load shedding, and graceful degradation.
+  - Path: `skills/api-and-backend/rate-limiting-and-backpressure-review`
+
 ## Frontend
 
 - `component-design-review`
@@ -98,6 +118,26 @@ Use this when you know the task but not the skill name.
   - Use when: dataset schema, grain, freshness, volume, reconciliation, or business-rule expectations need enforcement.
   - Produces: data quality contracts, checks, alerting expectations, and ownership notes.
   - Path: `skills/data/data-quality-contracts`
+
+- `data-freshness-investigation`
+  - Use when: a warehouse table, model, or dashboard is stale, lagging its SLA, or stopped updating.
+  - Produces: a freshness diagnosis pinning the broken pipeline stage with evidence, plus remediation and backfill recommendations.
+  - Path: `skills/data/data-freshness-investigation`
+
+- `data-reconciliation-investigation`
+  - Use when: two datasets that should agree don't — a warehouse metric vs. the source, two reports, or a model output vs. a hand count.
+  - Produces: a reconciliation diagnosis pinning the divergence stage with row-level evidence and a correction plan.
+  - Path: `skills/data/data-reconciliation-investigation`
+
+- `backfill-planning-and-verification`
+  - Use when: historical rows or partitions must be recomputed or reloaded after a logic fix, new column, late data, or corrected source.
+  - Produces: a backfill plan with scope, batching, idempotency proof, cost/load estimate, validation strategy, and rollback path.
+  - Path: `skills/data/backfill-planning-and-verification`
+
+- `data-pipeline-cost-review`
+  - Use when: a warehouse bill spikes or grows and you need to find and cut the cost drivers without losing correctness or freshness.
+  - Produces: a cost-attribution report with top drivers, per-fix savings estimates, and correctness/freshness risk notes.
+  - Path: `skills/data/data-pipeline-cost-review`
 
 ## DevOps and Infrastructure
 

@@ -21,6 +21,10 @@ After the minimum start feels useful, add these based on the kind of data work y
 
 - [skills/data/db-to-dwh-pipeline](../skills/data/db-to-dwh-pipeline/SKILL.md) - design or repair replication from operational databases into a warehouse, including incrementals, deletes, drift, reconciliation, and backfills.
 - [skills/data/data-quality-contracts](../skills/data/data-quality-contracts/SKILL.md) - turn implicit dataset assumptions into enforced contracts for schema, grain, freshness, volume, and business rules.
+- [skills/data/data-freshness-investigation](../skills/data/data-freshness-investigation/SKILL.md) - diagnose why a warehouse table or dashboard is stale by bisecting the pipeline to the broken stage.
+- [skills/data/data-reconciliation-investigation](../skills/data/data-reconciliation-investigation/SKILL.md) - find where two datasets that should agree diverge, with row-level proof and a verdict on which is right.
+- [skills/data/backfill-planning-and-verification](../skills/data/backfill-planning-and-verification/SKILL.md) - plan a safe, idempotent, cost-estimated backfill with validation and a rollback path.
+- [skills/data/data-pipeline-cost-review](../skills/data/data-pipeline-cost-review/SKILL.md) - attribute warehouse spend to its top drivers and propose cost cuts that don't break correctness or freshness.
 - [skills/planning/task-breakdown](../skills/planning/task-breakdown/SKILL.md) - turn a data request into a sequenced, verifiable plan.
 
 ## Situational Skills
