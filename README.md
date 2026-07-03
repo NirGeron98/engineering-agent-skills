@@ -1,4 +1,4 @@
-# my-agent-skills
+# engineering-agent-skills
 
 Workflow-based Agent Skills for engineering work.
 
@@ -95,7 +95,7 @@ skills/
 bundles/                   Optional role-based starting sets
 templates/                 Starting point for authoring new skills
 EVALUATION.md              Routing and behavior scenarios
-ROADMAP.md                 Current status and backlog
+ROADMAP.md                 Current scope and change policy
 ```
 
 Each skill folder contains four files with strictly separated jobs:
@@ -119,4 +119,4 @@ See [EVALUATION.md](EVALUATION.md): realistic scenarios with expected routing, a
 
 ## Status
 
-This is a workflow-based repository: 63 skills across fourteen task/domain categories, with four optional role bundles. See [ROADMAP.md](ROADMAP.md) for domain status and expansion plans.
+This is a workflow-based repository: 63 skills across fourteen task/domain categories, with four optional role bundles. See [ROADMAP.md](ROADMAP.md) for current scope and change policy.

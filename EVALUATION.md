@@ -1,6 +1,6 @@
 # Evaluating this repository
 
-Sixty-three realistic scenarios for testing whether these skills route correctly and change agent behavior. Run each prompt in a session with all 63 skills installed (`.claude/skills/`), against a repo that fits the scenario. Judge against the pass/fail criteria — not against whether the answer "sounds good". Scenarios 43-52 cover the `security-review` and `observability` domains; scenarios 53-63 cover the `database` and `performance` domains.
+Sixty-three realistic scenarios for testing whether these skills route correctly and change agent behavior. Run each prompt in a session where all 63 skills are available to the agent, against a repo that fits the scenario. Judge against the pass/fail criteria — not against whether the answer "sounds good". Scenarios 43-52 cover the `security-review` and `observability` domains; scenarios 53-63 cover the `database` and `performance` domains.
 
 Two things are under test in every scenario:
 

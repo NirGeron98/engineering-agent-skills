@@ -1,24 +1,23 @@
 # Roadmap
 
-This repository is currently focused on a small, workflow-based engineering skills library. The goal is to keep the entry path simple: choose the task you need, open the matching skill, and add optional bundles only when useful.
+This roadmap describes the public scope, stability policy, and expansion rules for `engineering-agent-skills`.
 
-## Approved bundles
+The repository is intentionally workflow-first: each skill should map to a real engineering task, produce a useful artifact, and make an agent gather evidence before drawing conclusions.
 
-- Backend Developer
-- Frontend Developer
-- Data Engineer
-- DevOps / Cloud Engineer
+## Current Stable Scope
 
-## Current user-facing model
+The v1.0 scope is stable:
 
-- `README.md` is the starting point.
-- `SKILL_CATALOG.md` is the task-based discovery surface.
-- `skills/` contains workflow/domain skill folders.
-- `bundles/` contains optional role-based recommendations.
+- 63 skills
+- 14 approved domains
+- 4 optional role bundles
+- one reusable skill template
 
-## Domain Status
+`README.md` is the entry point, `SKILL_CATALOG.md` is the exhaustive task-based discovery surface, `skills/` contains the workflows, and `bundles/` contains optional role-based starting sets.
 
-### Approved
+## Approved Domains
+
+These domains are approved and stable:
 
 - planning
 - debugging
@@ -35,133 +34,70 @@ This repository is currently focused on a small, workflow-based engineering skil
 - database
 - performance
 
-These domains are considered stable review domains and should not be rewritten during expansion.
+Approved domains may still receive bug fixes, clarity improvements, routing fixes, and narrowly scoped quality improvements. They should not be broadly rewritten without a concrete reason.
 
-### Draft / Needs Audit
+## Optional Bundles
 
-None currently
+Bundles are optional recommendations for users who prefer a role-based starting point:
 
-### Planned
+- Backend Developer
+- Frontend Developer
+- Data Engineer
+- DevOps / Cloud Engineer
 
-- code-quality (postponed: heavy overlap with architecture/review/refactor/dependency skills)
-- ai-engineering (postponed until after hardening/v1.0; useful but not launch-critical)
+Bundles should stay small and practical. They should point users to existing skills rather than becoming separate role manuals.
 
-These domains are planned but not yet drafted, and are not the immediate next wave. Each must be added as a controlled wave and start as Draft / Needs Audit only after hardening is complete.
+## Deferred Areas
 
-### Not Now / Revisit Later
+Some areas may be revisited later, but they are not part of the current stable scope:
 
+- code-quality
+- ai-engineering
 - product
 - collaboration
-- delivery as a standalone domain
+- standalone delivery workflows
 - platform-engineering
 - cloud-architecture
 - data-analysis
 
-These are deferred because they are currently too broad, too role-oriented, or have high overlap risk. Revisit only if concrete, non-duplicate workflows are identified.
+Deferred areas should only be added when they can be expressed as concrete, non-duplicate workflows that fit the existing domain model.
 
-## Current domains (detail)
+## Expansion Principles
 
-- Architecture domain: system design review, ADRs, module boundaries, coupling, technical debt triage, and safe refactor strategy.
-- Testing domain: test strategy, TDD workflow, legacy characterization tests, integration test design, E2E test debugging, and flaky test debugging.
-- Documentation domain: README review, API docs review, runbook writing, handoff documentation, changelog writing, and developer onboarding docs.
-- Security Review domain (Approved): secrets exposure review, dependency vulnerability triage, input validation security review, access control boundary review, and security incident scoping. Defensive only.
-- Observability domain (Approved): metrics and alerts review, log signal quality review, trace-based latency diagnosis, SLO definition review, and dashboard signal audit.
-- Database domain (Approved): query performance review, schema migration safety review, index strategy review, data consistency incident diagnosis, connection pool and locking debugging, and backup/restore readiness.
-- Performance domain (Approved): hot path profiling review, memory leak diagnosis, throughput bottleneck triage, caching strategy review, and load test result review.
+- One skill solves one real workflow.
+- Skills are task-first, not role-first.
+- Every skill must produce a concrete artifact.
+- Every skill must require evidence from files, commands, logs, traces, tests, plans, queries, browser checks, or user-provided artifacts.
+- New skills must avoid duplicating existing skills; use explicit handoffs when workflows touch.
+- `SKILL_CATALOG.md` remains the exhaustive discovery surface.
+- `README.md` remains short and task-oriented.
+- `ROADMAP.md` remains the public status and change-policy document.
 
-## Expansion Waves
+## Contribution And Change Rules
 
-**Wave 1: Finish Testing + Documentation audit. (Completed)**
+Before adding or changing a skill:
 
-Included:
+1. Check `SKILL_CATALOG.md` for overlap.
+2. Confirm the proposed change is a workflow, not a broad topic.
+3. Keep the main `SKILL.md` short enough to follow at runtime.
+4. Put detailed quality gates in `references/checklist.md`.
+5. Put recurring failure modes in `references/anti-patterns.md`.
+6. Include or update `examples/sample-task.md` when behavior changes.
+7. Validate routing and expected behavior with `EVALUATION.md` where relevant.
 
-- critical audit
-- patches if needed
-- live smoke tests
-- approval decision
+New domains or large expansions should start conservatively and should not update role bundles until their workflows are stable.
 
-**Wave 2: Security Review + Observability. (Completed)**
+## Stability Policy
 
-Included:
+The public v1.0 surfaces are stable:
 
-- security-review must not duplicate auth-flow-review
-- observability must not duplicate incident-triage-runbook
-- both are evidence-first and started as Draft / Needs Audit
+- `README.md`
+- `SKILL_CATALOG.md`
+- `ROADMAP.md`
+- `EVALUATION.md`
+- `templates/`
+- approved skill bodies
 
-**Wave 3: Database + Performance. (Completed)**
+Stable does not mean frozen. Maintenance is welcome when it fixes stale information, improves routing clarity, corrects behavior, strengthens validation, or keeps the repository easier to use.
 
-Included:
-
-- database focuses on OLTP/query/schema/migration/operational database workflows
-- performance avoids duplicating frontend-performance-review and is backend/systems scoped
-- both are evidence-first and started as Draft / Needs Audit
-
-**Wave 4: Hardening + Core Coverage.**
-
-A strategic audit after Wave 3 recommended pausing broad domain expansion: the repository is already large enough to be credible, and the main risk is now imbalance, stale discovery surfaces, overlap, and older domains not being held to the current audit bar. This replaces Code Quality + AI Engineering as the immediate next wave.
-
-Include:
-
-- fix README drift and stale counts/statuses
-- re-audit the oldest approved domains using the current audit standard: planning, debugging, review, api-and-backend, frontend, data, devops-infrastructure
-- add only a small number of high-leverage missing workflows if needed
-- do not add broad new domains before v1.0
-- keep Code Quality and AI Engineering as post-hardening candidates, not the immediate next wave
-
-Candidate high-leverage skills to consider later in this phase (not to be created yet):
-
-- regression-bisection (debugging)
-- race-condition-and-concurrency-debugging (debugging)
-- environment-diff-debugging (debugging)
-- background-jobs-and-queue-review (api-and-backend)
-- spike-investigation (planning)
-- pr-authoring-and-self-review (review)
-
-**Wave 5: Cloud Architecture as a possible solo wave.**
-
-Include:
-
-- only add if it can be clearly separated from architecture-review, devops-infrastructure, and terraform-plan-review
-- keep it small if added
-
-## Expansion Rules
-
-- one skill = one real workflow
-- no generic topic skills
-- no role-first expansion
-- every skill must produce a concrete artifact
-- every skill must be evidence-first
-- every new domain starts as Draft / Needs Audit
-- domains become Approved only after critical audit and smoke tests
-- README.md should stay short
-- SKILL_CATALOG.md is the exhaustive discovery surface
-- bundles/ should not be updated for Draft domains
-
-## Optional polish backlog
-
-- Add `terraform show -json tfplan` as an optional structured-analysis command in `terraform-plan-review`.
-- Add a GCP Eventarc / Cloud Run IAM example in `iam-permissions-debugging`.
-- Add server normalization / canonicalization coverage in `form-validation-review`.
-- Add component API compatibility / migration impact coverage in `component-design-review`.
-- Add a stronger auth headers, cookies, and CORS example in `api-integration-debugging`.
-- Add RTL autofill / cursor fixture wording in `rtl-ui-review`.
-
-## Next candidate bundles
-
-None planned before v1.0. Product Manager and Data Analyst bundles remain Not Now / Revisit Later — do not add them unless concrete, non-duplicate workflows justify them later.
-
-## v1.0 Launch Checklist
-
-1. Fix packaging/documentation drift (EVALUATION.md scenario counts and statuses, ROADMAP.md stale sections, missing template file, missing LICENSE).
-2. Validate all markdown links and skill-folder file completeness (all 63 skills have `SKILL.md`, `references/checklist.md`, `references/anti-patterns.md`, `examples/sample-task.md`).
-3. Add a LICENSE file.
-4. Initialize git if the repository is not already one, and make an initial commit.
-5. Tag `v1.0.0`.
-
-## v1.0 Change Control
-
-- After v1.0, `README.md`, `SKILL_CATALOG.md`, `ROADMAP.md`, `EVALUATION.md`, `templates/`, and approved skill bodies are stable surfaces.
-- Do not modify these files unless a task explicitly asks for maintenance, a bug fix, or a targeted approved change.
-- New domains or skills must start as Draft / Needs Audit.
-- Approved skills should not be rewritten broadly; any edit to an approved skill must be targeted, evidence-backed, and followed by validation.
-- `README.md` stays short. `SKILL_CATALOG.md` stays the exhaustive discovery surface. `ROADMAP.md` stays the single status and expansion planning surface.
+Approved skill bodies should only change for targeted, evidence-backed reasons. Documentation-only improvements should preserve the workflow/domain-first structure.
