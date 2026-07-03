@@ -6,7 +6,7 @@ The repository is intentionally workflow-first: each skill should map to a real 
 
 ## Current Stable Scope
 
-The v1.0 scope is stable:
+The current public scope is stable:
 
 - 63 skills
 - 14 approved domains
@@ -89,7 +89,7 @@ New domains or large expansions should start conservatively and should not updat
 
 ## Stability Policy
 
-The public v1.0 surfaces are stable:
+The public repository surfaces are stable:
 
 - `README.md`
 - `SKILL_CATALOG.md`
