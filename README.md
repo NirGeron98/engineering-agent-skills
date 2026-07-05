@@ -64,25 +64,34 @@ Bundles are optional starting sets for people who prefer role-based recommendati
 
 This repository already contains a Claude-compatible `.claude/skills/` directory. Do not copy the repository root into `.claude/skills`; copy the skill folders inside `.claude/skills/`.
 
-To install all skills globally:
+### End-to-end: add all skills to a project
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -R .claude/skills/* ~/.claude/skills/
-```
-
-To install all skills into a project:
-
-```bash
+git clone https://github.com/NirGeron98/engineering-agent-skills.git /tmp/engineering-agent-skills
 mkdir -p /path/to/project/.claude/skills
-cp -R .claude/skills/* /path/to/project/.claude/skills/
+cp -R /tmp/engineering-agent-skills/.claude/skills/* /path/to/project/.claude/skills/
+rm -rf /tmp/engineering-agent-skills
 ```
 
-To install one skill:
+### End-to-end: add one skill to a project
 
 ```bash
-cp -R .claude/skills/diagnose-bug /path/to/project/.claude/skills/
+git clone https://github.com/NirGeron98/engineering-agent-skills.git /tmp/engineering-agent-skills
+mkdir -p /path/to/project/.claude/skills
+cp -R /tmp/engineering-agent-skills/.claude/skills/diagnose-bug /path/to/project/.claude/skills/
+rm -rf /tmp/engineering-agent-skills
 ```
+
+### End-to-end: add all skills globally (all projects)
+
+```bash
+git clone https://github.com/NirGeron98/engineering-agent-skills.git /tmp/engineering-agent-skills
+mkdir -p ~/.claude/skills
+cp -R /tmp/engineering-agent-skills/.claude/skills/* ~/.claude/skills/
+rm -rf /tmp/engineering-agent-skills
+```
+
+If you already have this repository cloned locally, skip the `git clone`/`rm -rf` steps and run the `mkdir` + `cp -R` commands from inside the repo root, using `.claude/skills/...` as the source instead of the `/tmp` clone path.
 
 Claude loads a skill automatically when the task matches its description, or explicitly via `/skill-name`.
 
