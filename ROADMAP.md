@@ -13,7 +13,7 @@ The current public scope is stable:
 - 4 optional role bundles
 - one reusable skill template
 
-`README.md` is the entry point, `SKILL_CATALOG.md` is the exhaustive task-based discovery surface, `skills/` contains the workflows, and `bundles/` contains optional role-based starting sets.
+`README.md` is the entry point, `SKILL_CATALOG.md` is the exhaustive task-based discovery surface, `.claude/skills/` contains the workflows, and `bundles/` contains optional role-based starting sets. Domain grouping (below) is conceptual and represented in `SKILL_CATALOG.md` and this file, not by nested folders under `.claude/skills/`.
 
 ## Approved Domains
 

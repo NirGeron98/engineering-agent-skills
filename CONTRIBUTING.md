@@ -18,7 +18,7 @@ This repository is a workflow-first Agent Skills library for practical software 
 Each skill must use the required four-file structure:
 
 ```text
-skills/<domain>/<skill-name>/
+.claude/skills/<skill-name>/
   SKILL.md
   references/checklist.md
   references/anti-patterns.md

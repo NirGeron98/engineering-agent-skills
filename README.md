@@ -10,42 +10,42 @@ Do not install everything. Start with the workflow you need.
 
 | I need to... | Start here |
 |---|---|
-| Understand a repository | [skills/planning/repo-onboarding](skills/planning/repo-onboarding) |
-| Break down technical work | [skills/planning/task-breakdown](skills/planning/task-breakdown) |
-| Debug a bug | [skills/debugging/diagnose-bug](skills/debugging/diagnose-bug) |
-| Review code | [skills/review/code-review](skills/review/code-review) |
-| Design or review an API | [skills/api-and-backend/api-design-review](skills/api-and-backend/api-design-review) |
-| Debug a deployed service | [skills/api-and-backend/service-debugging](skills/api-and-backend/service-debugging) |
-| Review auth or authorization | [skills/api-and-backend/auth-flow-review](skills/api-and-backend/auth-flow-review) |
-| Review a queue, webhook, or retry-safety concern | [skills/api-and-backend/idempotency-and-retry-safety-review](skills/api-and-backend/idempotency-and-retry-safety-review) |
-| Review overload protection and rate limiting | [skills/api-and-backend/rate-limiting-and-backpressure-review](skills/api-and-backend/rate-limiting-and-backpressure-review) |
-| Debug frontend/API integration | [skills/frontend/api-integration-debugging](skills/frontend/api-integration-debugging) |
-| Review frontend state | [skills/frontend/frontend-state-management](skills/frontend/frontend-state-management) |
-| Review data quality | [skills/data/data-quality-contracts](skills/data/data-quality-contracts) |
-| Investigate stale or mismatched data | [skills/data/data-reconciliation-investigation](skills/data/data-reconciliation-investigation) |
-| Plan a data backfill | [skills/data/backfill-planning-and-verification](skills/data/backfill-planning-and-verification) |
-| Review a Terraform plan | [skills/devops-infrastructure/terraform-plan-review](skills/devops-infrastructure/terraform-plan-review) |
-| Debug IAM permissions | [skills/devops-infrastructure/iam-permissions-debugging](skills/devops-infrastructure/iam-permissions-debugging) |
-| Debug Kubernetes workloads | [skills/devops-infrastructure/kubernetes-workload-debugging](skills/devops-infrastructure/kubernetes-workload-debugging) |
-| Review a system design or major technical change | [skills/architecture/architecture-review](skills/architecture/architecture-review) |
-| Write or update an ADR | [skills/architecture/architecture-decision-record](skills/architecture/architecture-decision-record) |
-| Review module boundaries or coupling | [skills/architecture/module-boundary-review](skills/architecture/module-boundary-review) |
-| Plan a safe refactor | [skills/architecture/refactor-strategy](skills/architecture/refactor-strategy) |
-| Plan test coverage | [skills/testing/test-strategy](skills/testing/test-strategy) |
-| Debug a flaky test | [skills/testing/flaky-test-debugging](skills/testing/flaky-test-debugging) |
-| Debug an E2E test | [skills/testing/e2e-test-debugging](skills/testing/e2e-test-debugging) |
-| Review or improve a README | [skills/documentation/readme-review](skills/documentation/readme-review) |
-| Write a runbook | [skills/documentation/runbook-writer](skills/documentation/runbook-writer) |
-| Write a changelog | [skills/documentation/changelog-writer](skills/documentation/changelog-writer) |
-| Review possible secrets exposure | [skills/security-review/secrets-exposure-review](skills/security-review/secrets-exposure-review) |
-| Triage dependency vulnerabilities | [skills/security-review/dependency-vulnerability-triage](skills/security-review/dependency-vulnerability-triage) |
-| Review alerts and metrics | [skills/observability/metrics-and-alerts-review](skills/observability/metrics-and-alerts-review) |
-| Diagnose latency from traces | [skills/observability/trace-based-latency-diagnosis](skills/observability/trace-based-latency-diagnosis) |
-| Review a slow database query | [skills/database/query-performance-review](skills/database/query-performance-review) |
-| Review a risky schema migration | [skills/database/schema-migration-safety-review](skills/database/schema-migration-safety-review) |
-| Debug DB locks, deadlocks, or pool exhaustion | [skills/database/connection-pool-and-locking-debugging](skills/database/connection-pool-and-locking-debugging) |
-| Review profiling evidence for a slow backend path | [skills/performance/hot-path-profiling-review](skills/performance/hot-path-profiling-review) |
-| Review load test results | [skills/performance/load-test-result-review](skills/performance/load-test-result-review) |
+| Understand a repository | [.claude/skills/repo-onboarding](.claude/skills/repo-onboarding) |
+| Break down technical work | [.claude/skills/task-breakdown](.claude/skills/task-breakdown) |
+| Debug a bug | [.claude/skills/diagnose-bug](.claude/skills/diagnose-bug) |
+| Review code | [.claude/skills/code-review](.claude/skills/code-review) |
+| Design or review an API | [.claude/skills/api-design-review](.claude/skills/api-design-review) |
+| Debug a deployed service | [.claude/skills/service-debugging](.claude/skills/service-debugging) |
+| Review auth or authorization | [.claude/skills/auth-flow-review](.claude/skills/auth-flow-review) |
+| Review a queue, webhook, or retry-safety concern | [.claude/skills/idempotency-and-retry-safety-review](.claude/skills/idempotency-and-retry-safety-review) |
+| Review overload protection and rate limiting | [.claude/skills/rate-limiting-and-backpressure-review](.claude/skills/rate-limiting-and-backpressure-review) |
+| Debug frontend/API integration | [.claude/skills/api-integration-debugging](.claude/skills/api-integration-debugging) |
+| Review frontend state | [.claude/skills/frontend-state-management](.claude/skills/frontend-state-management) |
+| Review data quality | [.claude/skills/data-quality-contracts](.claude/skills/data-quality-contracts) |
+| Investigate stale or mismatched data | [.claude/skills/data-reconciliation-investigation](.claude/skills/data-reconciliation-investigation) |
+| Plan a data backfill | [.claude/skills/backfill-planning-and-verification](.claude/skills/backfill-planning-and-verification) |
+| Review a Terraform plan | [.claude/skills/terraform-plan-review](.claude/skills/terraform-plan-review) |
+| Debug IAM permissions | [.claude/skills/iam-permissions-debugging](.claude/skills/iam-permissions-debugging) |
+| Debug Kubernetes workloads | [.claude/skills/kubernetes-workload-debugging](.claude/skills/kubernetes-workload-debugging) |
+| Review a system design or major technical change | [.claude/skills/architecture-review](.claude/skills/architecture-review) |
+| Write or update an ADR | [.claude/skills/architecture-decision-record](.claude/skills/architecture-decision-record) |
+| Review module boundaries or coupling | [.claude/skills/module-boundary-review](.claude/skills/module-boundary-review) |
+| Plan a safe refactor | [.claude/skills/refactor-strategy](.claude/skills/refactor-strategy) |
+| Plan test coverage | [.claude/skills/test-strategy](.claude/skills/test-strategy) |
+| Debug a flaky test | [.claude/skills/flaky-test-debugging](.claude/skills/flaky-test-debugging) |
+| Debug an E2E test | [.claude/skills/e2e-test-debugging](.claude/skills/e2e-test-debugging) |
+| Review or improve a README | [.claude/skills/readme-review](.claude/skills/readme-review) |
+| Write a runbook | [.claude/skills/runbook-writer](.claude/skills/runbook-writer) |
+| Write a changelog | [.claude/skills/changelog-writer](.claude/skills/changelog-writer) |
+| Review possible secrets exposure | [.claude/skills/secrets-exposure-review](.claude/skills/secrets-exposure-review) |
+| Triage dependency vulnerabilities | [.claude/skills/dependency-vulnerability-triage](.claude/skills/dependency-vulnerability-triage) |
+| Review alerts and metrics | [.claude/skills/metrics-and-alerts-review](.claude/skills/metrics-and-alerts-review) |
+| Diagnose latency from traces | [.claude/skills/trace-based-latency-diagnosis](.claude/skills/trace-based-latency-diagnosis) |
+| Review a slow database query | [.claude/skills/query-performance-review](.claude/skills/query-performance-review) |
+| Review a risky schema migration | [.claude/skills/schema-migration-safety-review](.claude/skills/schema-migration-safety-review) |
+| Debug DB locks, deadlocks, or pool exhaustion | [.claude/skills/connection-pool-and-locking-debugging](.claude/skills/connection-pool-and-locking-debugging) |
+| Review profiling evidence for a slow backend path | [.claude/skills/hot-path-profiling-review](.claude/skills/hot-path-profiling-review) |
+| Review load test results | [.claude/skills/load-test-result-review](.claude/skills/load-test-result-review) |
 
 ## Skill Catalog
 
@@ -62,9 +62,31 @@ Bundles are optional starting sets for people who prefer role-based recommendati
 
 ## How to Install and Use
 
-**Claude Code**: copy the skill folders you need into `.claude/skills/` in your project, or `~/.claude/skills/` for all projects. Claude loads a skill automatically when the task matches its description, or explicitly via `/skill-name`.
+This repository already contains a Claude-compatible `.claude/skills/` directory. Do not copy the repository root into `.claude/skills`; copy the skill folders inside `.claude/skills/`.
 
-**Cursor / Codex / other agents**: reference the `SKILL.md` file in your prompt or rules file, for example: *"Follow the workflow in skills/debugging/diagnose-bug/SKILL.md."* The skills are plain Markdown and tool-agnostic; only the frontmatter convention is Claude-specific.
+To install all skills globally:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R .claude/skills/* ~/.claude/skills/
+```
+
+To install all skills into a project:
+
+```bash
+mkdir -p /path/to/project/.claude/skills
+cp -R .claude/skills/* /path/to/project/.claude/skills/
+```
+
+To install one skill:
+
+```bash
+cp -R .claude/skills/diagnose-bug /path/to/project/.claude/skills/
+```
+
+Claude loads a skill automatically when the task matches its description, or explicitly via `/skill-name`.
+
+**Cursor / Codex / other agents**: reference the `SKILL.md` file in your prompt or rules file, for example: *"Follow the workflow in .claude/skills/diagnose-bug/SKILL.md."* The skills are plain Markdown and tool-agnostic; only the frontmatter convention is Claude-specific.
 
 **Composing skills**: skills reference each other by name where handoffs are natural. For example, `api-integration-debugging` can hand a proven server-side issue to `service-debugging`, and `terraform-plan-review` can hand a permission root cause to `iam-permissions-debugging`.
 
@@ -81,26 +103,20 @@ Every skill should change what the agent does, not just how the answer reads:
 ## Repository Structure
 
 ```text
-skills/
-  planning/                Repo orientation and technical planning
-  debugging/               Reproducible bug diagnosis
-  review/                  Code review workflows
-  api-and-backend/         API contracts, service debugging, auth, queues, webhooks, idempotency, rate limiting
-  frontend/                Components, state, forms, a11y, RTL, performance, API integration
-  data/                    Pipelines, warehouse modeling, data quality, freshness, reconciliation, backfills, cost
-  devops-infrastructure/   CI/CD, deployments, Terraform, IAM, Kubernetes, incidents, releases
-  architecture/            System design, ADRs, boundaries, coupling, debt triage, refactors
-  testing/                 Test strategy, TDD, characterization, integration, E2E, flaky tests
-  documentation/           READMEs, API docs, runbooks, handoffs, changelogs, onboarding docs
-  security-review/         Secrets exposure, dependency triage, input validation, access boundaries, incident scoping
-  observability/           Alerts, log signal quality, trace-based latency, SLOs, dashboard audits
-  database/                Query performance, schema migration safety, indexing, consistency, locking, backup/restore
-  performance/             Hot path profiling, memory leak diagnosis, throughput triage, caching strategy, load test review
+.claude/skills/            All 71 skill folders, installable as-is by Claude Code
+  <skill-name>/
+    SKILL.md               Workflow: goal, triggers, steps, output format, failure modes
+    references/checklist.md
+    references/anti-patterns.md
+    examples/sample-task.md
 bundles/                   Optional role-based starting sets
 templates/                 Starting point for authoring new skills
+SKILL_CATALOG.md           Exhaustive task-based catalog, grouped by domain
 EVALUATION.md              Routing and behavior scenarios
 ROADMAP.md                 Current scope and change policy
 ```
+
+Skills are grouped by domain (planning, debugging, review, api-and-backend, frontend, data, devops-infrastructure, architecture, testing, documentation, security-review, observability, database, performance) for discovery purposes only, in [SKILL_CATALOG.md](SKILL_CATALOG.md) and [ROADMAP.md](ROADMAP.md). Domains are not physical folders — every skill lives directly under `.claude/skills/<skill-name>/`.
 
 Each skill folder contains four files with strictly separated jobs:
 

@@ -749,7 +749,7 @@ Two things are under test in every scenario:
 **User prompt**: "We have distributed traces for a slow checkout request. Diagnose where latency is coming from."
 
 **Expected skill**: `trace-based-latency-diagnosis`
-**Acceptable secondary**: `service-debugging` if it broadens into general runtime debugging; `skills/performance/hot-path-profiling-review` if it narrows into code-level profiling.
+**Acceptable secondary**: `service-debugging` if it broadens into general runtime debugging; `hot-path-profiling-review` if it narrows into code-level profiling.
 
 **Expected behavior**: inspects actual trace/span data; builds a latency breakdown identifying the largest span or gap; flags unexplained gaps as missing-instrumentation risk rather than settled; records ruled-out causes; proposes next verification steps (add instrumentation, compare traces).
 
